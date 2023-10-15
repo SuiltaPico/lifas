@@ -1,0 +1,47 @@
+{
+  "name": "lifas",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "tauri": "tauri"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@8.9.0",
+  "dependencies": {
+    "@tauri-apps/api": "^1.5.0",
+    "pnpm": "^8.9.0",
+    "solid-js": "^1.7.8",
+    "sqlstring": "^2.3.3",
+    "tauri-plugin-sql-api": "tauri-apps/tauri-plugin-sql#v1"
+  },
+  "devDependencies": {
+    "@iconify-icon/solid": "^1.0.8",
+    "@iconify/icons-mdi": "^1.2.47",
+    "@julr/unocss-preset-heropatterns": "^1.0.2",
+    "@rollup/plugin-swc": "^0.2.1",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@tauri-apps/cli": "^1.5.0",
+    "@types/sqlstring": "^2.3.0",
+    "@unocss/preset-icons": "^0.56.5",
+    "@unocss/preset-uno": "^0.56.5",
+    "@unocss/preset-wind": "^0.56.5",
+    "@unocss/transformer-variant-group": "^0.56.5",
+    "autoprefixer": "^10.4.16",
+    "iconify-icon": "^1.0.8",
+    "postcss": "^8.4.31",
+    "rollup": "^4.1.1",
+    "rollup-plugin-swc": "^0.2.1",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tailwindcss": "^3.3.3",
+    "ts-transformer-keys": "^0.4.4",
+    "ttypescript": "^1.5.15",
+    "typescript": "^5.0.2",
+    "unocss": "^0.56.5",
+    "vite": "^4.4.4",
+    "vite-plugin-solid": "^2.7.0"
+  }
+}
