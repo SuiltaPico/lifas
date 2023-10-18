@@ -8,3 +8,4 @@ export const life_record_db = generate_crud<LifeRecord>("life_record", {
   end_date: "TIMESTAMP",
   description: "TEXT NOT NULL",
 });
+

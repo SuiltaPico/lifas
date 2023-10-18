@@ -19,15 +19,14 @@ function generate_create_table_sql(
 async function update_database(create_table_sql: string) {
   await sql_execute(`
   BEGIN TRANSACTION;
-  DECLARE uv INTEGER;
-  SET uv = PRAGMA user_version;
   -- 执行数据库模式更新
-  IF uv < ${CURRENT_DB_VERSION} THEN
+  SELECT *,
+  CASE uv WHEN uv < ${CURRENT_DB_VERSION} THEN
     -- 创建表格的SQL语句
-    DECLARE create_table_sql TEXT;
-    SET create_table_sql = ${create_table_sql};
+    SELECT ${create_table_sql} AS create_table_sql;
     EXECUTE create_table_sql;
-  END IF;
+  FROM pragma_index_info('user_version');
+  
   COMMIT;
   `);
 }
@@ -66,13 +65,10 @@ export function generate_crud<T extends Record<string, any>>(
     return res;
   }
 
-  async function get_all(page: number, page_size: number) {
+  async function get_all() {
     await init_promise;
 
-    const res = await sql_select<T[]>(`SELECT * FROM ${table_name}`, [
-      page_size,
-      page,
-    ]);
+    const res = await sql_select<T[]>(`SELECT * FROM ${table_name}`);
     return res;
   }
 
@@ -108,7 +104,7 @@ export function generate_crud<T extends Record<string, any>>(
     await sql_execute(sql, [id, ...values]);
   }
   return {
-    init
+    init,
     get_page_count,
     get_page,
     get_all,

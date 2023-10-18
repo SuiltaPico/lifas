@@ -6,6 +6,7 @@ import searchIcon from "@iconify/icons-mdi/search";
 import { IconifyIcon } from "iconify-icon";
 import { createStore } from "solid-js/store";
 import { useLifeRecordState } from "./state/life_record";
+import { life_record_db } from "./db/life_record";
 
 const SearchBar: Component<{ class?: string }> = (props) => {
   return (
@@ -82,10 +83,16 @@ function App() {
   const [greetMsg, setGreetMsg] = createSignal("");
   const [name, setName] = createSignal("");
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke("greet", { name: name() }));
+  async function init() {
+    const [lifeRecordState, setLifeRecordState] = useLifeRecordState();
+    const records = await life_record_db.get_all();
+    setLifeRecordState((it) => {
+      it.curr_page_records = records;
+      return it;
+    });
   }
+
+  init()
 
   return (
     <div class="bg-neutral-100 w-full h-full p-6 flex flex-col gap-4">
